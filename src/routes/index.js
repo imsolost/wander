@@ -1,13 +1,13 @@
 const router = require('express').Router()
 
 const setLocals = (req, res, next) => {
-  let loggedIn
-  let username
-  if (req.session.user) {
+  let loggedIn = false
+  let username = null
+  if (req.session.username) {
     loggedIn = true
-    username = req.session.user.username
+    username = req.session.username
   }
-  res.locals = {loggedIn, username: username || null}
+  res.locals = {loggedIn, username}
   next()
 }
 
