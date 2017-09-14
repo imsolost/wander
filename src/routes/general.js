@@ -16,7 +16,7 @@ router.route('/signup')
         users.create(username, req.body.email, password)
           .then(() => {
             req.session.username = username
-            req.session.save( res.redirect('/')) //`/profile/${rusername}`))
+            req.session.save( res.redirect(`/profile/${rusername}`))
           })
       })
       .catch(error => res.status(500).render('error', {error}))
@@ -32,7 +32,7 @@ router.route('/signin')
           .then((boolean) => {
             if (boolean) {
               req.session.username = username
-              req.session.save(res.redirect('/')) //`/profile/${username}`))
+              req.session.save(res.redirect(`/profile/${username}`))
             } else res.redirect('/signin')
           })
       })
@@ -43,5 +43,10 @@ router.get('/logout', (req, res) => {
   req.session.destroy(res.redirect('/'))
 })
 
+router.get('/profile/:username', (req, res) => {
+  users.getByUsername(req.params.username)
+    .then(user => res.render('profile', {user, moment}))
+    .catch(error => res.status(500).render('error', {error}))
+})
 
 module.exports = router
