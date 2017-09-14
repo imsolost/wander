@@ -23,6 +23,14 @@ const getByUsername = (username) => {
     })
 }
 
+const getPosts = (user) => {
+  return db.query('SELECT * FROM cities', [])
+    .catch((error) => {
+      console.log('\nError in getAll query\n')
+      throw error
+    })
+}
+
 module.exports = {
   create,
   getByUsername,

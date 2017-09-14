@@ -19,6 +19,14 @@ const getByCityname = (cityname) => {
     })
 }
 
+const getPosts = (city) => {
+  return db.query('SELECT * FROM cities', [])
+    .catch((error) => {
+      console.log('\nError in getAll query\n')
+      throw error
+    })
+}
+
 module.exports = {
   getAll,
   getByCityname,
