@@ -1,5 +1,12 @@
 <%- include partials/header.ejs %>
   <div class="column">
-    hello world
+    <h2>Records</h2>
+    <% cities.forEach( city => { %>
+      <div>
+        <h3><a href="/city/<%= city.cityname %>"><%= city.cityname %></a></h3>
+        <span><%= city.country %></span>
+      </div>
+      <% }) %>
+    </div>
   </div>
 <%- include partials/footer.ejs %>

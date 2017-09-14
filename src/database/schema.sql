@@ -1,6 +1,6 @@
 CREATE TABLE cities (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  cityname VARCHAR(255) NOT NULL,
   country VARCHAR(255) NOT NULL
 );
 

@@ -1,10 +1,14 @@
 const utils = require('../utils/bcrypt')
 const users = require('../database/users.js')
+const cities = require('../database/cities.js')
 const moment = require('moment')
 const router = require('express').Router()
 
 router.get('/', (req, res) => {
-  res.render('index')
+  cities.getAll()
+    .then((cities) => {
+      res.render('index', {cities})
+    })
 })
 
 router.route('/signup')
@@ -16,7 +20,7 @@ router.route('/signup')
         users.create(username, req.body.email, password)
           .then(() => {
             req.session.username = username
-            req.session.save( res.redirect(`/profile/${rusername}`))
+            req.session.save(res.redirect(`/profile/${rusername}`))
           })
       })
       .catch(error => res.status(500).render('error', {error}))
@@ -46,6 +50,12 @@ router.get('/logout', (req, res) => {
 router.get('/profile/:username', (req, res) => {
   users.getByUsername(req.params.username)
     .then(user => res.render('profile', {user, moment}))
+    .catch(error => res.status(500).render('error', {error}))
+})
+
+router.get('/city/:cityname', (req, res) => {
+  cities.getByCityname(req.params.cityname)
+    .then(city => res.render('city', {city}))
     .catch(error => res.status(500).render('error', {error}))
 })
 

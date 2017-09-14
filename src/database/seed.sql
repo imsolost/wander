@@ -1,5 +1,5 @@
 INSERT INTO
-  cities (name, country)
+  cities (cityname, country)
 VALUES
   ('Malibu', 'USA'),
   ('Oakland', 'USA'),
